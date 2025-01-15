@@ -1,9 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api');
 
 // Replace with your bot token
-const token = 'YOUR_BOT_TOKEN';
+const token = '7398510838:AAEGIsugBsWjHPn-NaGys6-fdbd_ST4lWIs';// checkout my article on how to get bot token from @BotFather on Telegram
 
-const WEB_HOOK_URL = 'Your webhook url';
+const WEB_HOOK_URL = 'https://localhost:3000/telegram-bot-webhook'; // we need ngrok cause telegram webhook won't work with localhost.
 
 // Create a bot that uses polling
 const bot = new TelegramBot(token, { webHook: {
@@ -37,3 +37,5 @@ bot.on('message', (msg) => {
         bot.sendMessage(chatId, "I'm not sure how to respond to that.");
     }
 });
+
+module.exports = bot;
