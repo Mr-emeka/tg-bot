@@ -3,8 +3,24 @@ const TelegramBot = require('node-telegram-bot-api');
 // Replace with your bot token
 const token = 'YOUR_BOT_TOKEN';
 
+const WEB_HOOK_URL = 'Your webhook url';
+
 // Create a bot that uses polling
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { webHook: {
+    port: 88 // 443, 80, 88, 8443 allowed ports for telegram webhook
+} });
+
+
+const initWebHook = async () => {
+    const webhookInfo = await bot.getWebHookInfo();
+    if (webhookInfo.url !== WEB_HOOK_URL) {
+      await bot.setWebHook(WEB_HOOK_URL, {
+        max_connections: 100,
+      });
+    }
+  };
+  
+  initWebHook();
 
 // Listen for any message
 bot.on('message', (msg) => {
